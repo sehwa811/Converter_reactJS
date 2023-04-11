@@ -1,0 +1,94 @@
+* {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+#root {
+    background-color: rgb(242, 242, 242);
+    border-color: rgb(153, 204, 255);
+    border-style:solid;
+    width: 40%;
+    height: 400px;
+    padding: 100px;
+    margin: auto;
+    text-align: center;
+}
+
+h1 {
+  font-size: 50px;
+  font-style: bold;
+}
+
+select {
+  width: 250px;
+  height: 40px;
+  text-align: center;
+  font-size: 16px;
+  border: 2px solid rgb(128, 191, 255);
+  border-radius: 5px;
+}
+
+select:hover {
+  background-color: rgb(128, 191, 255);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+
+hr {
+    border: 1.5px dotted;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+label {
+  font-size: 20px;
+  margin: 15px;
+}
+
+
+#kilometers {
+    width: 200px;
+    height: 25px;
+    position: relative;
+    margin: 5px;
+  }
+  
+  #miles {
+    width: 200px;
+    height: 25px;
+    position: relative;
+    margin: 5px;
+  }
+  
+  #minutes {
+    width: 200px;
+    height: 25px;
+    position: relative;
+    margin: 5px;
+  }
+  
+  #hours {
+    width: 200px;
+    height: 25px;
+    position: relative;
+    margin: 5px;
+  }
+
+
+button {
+  width: 80px;
+  height: 35px;
+  font-size: 15px;
+  text-align: center;
+  position: relative;
+  margin: 25px 15px;
+  border: 2px solid rgb(128, 191, 255);
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: rgb(128, 191, 255);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}

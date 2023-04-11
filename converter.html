@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+
+    function MinutesToHours() {
+        const [amount, setAmount] = React.useState();
+        const [inverted, setInverted] = React.useState(false);
+
+        const onChange = (event) => {
+            setAmount(event.target.value);
+        };
+        const reset = () => {
+
+            setAmount(0);
+        }
+        const onInvert =() => {
+            reset();
+            setInverted((current) => !current);
+        }
+
+        return (
+            <div>
+                <div>
+                    <label htmlFor="minutes">Minutes</label>
+                    <input 
+                        value={inverted ? amount*60 : amount}
+                        id="minutes"
+                        placeholder="Minutes" 
+                        type="number" 
+                        onChange={onChange} 
+                        disabled={inverted}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="hours">Hours</label>
+                    <input 
+                        value={inverted ? amount : Math.round(amount / 60)} 
+                        id="hours" 
+                        placeholder="Hours" 
+                        type="number"
+                        disabled={!inverted}
+                        onChange={onChange} 
+                        
+                     />
+                </div>
+                <button class="btn_left" onClick={reset}>reset</button>
+                <button class="btn_right" onClick={onInvert}>{inverted ? "turn back" : "invert"}</button>
+            </div>
+        );
+    }
+
+    function KmToMiles() {
+        const [figure, setFigure] = React.useState();
+        const [inverted, setInverted] = React.useState(true);
+
+        const reset = () => setFigure(0);
+        const onInvert = () => {
+            setInverted((current) => !current);
+            reset();
+        }
+
+        function onChange(event) {
+            setFigure(event.target.value);
+        }
+
+        return (
+            <div>
+                <div>
+                    <label htmlFor="kilometers">Kilometers</label>
+                    <input
+                        value={inverted ? figure : Math.round(figure*1.609*1000)/1000}
+                        id="kilometers" 
+                        placeholder="Kilometers" 
+                        type="number"
+                        disabled={!inverted}
+                        onChange={onChange}
+                    />
+                </div>
+
+                <div>
+                    <label htmlFor="miles">Miles</label>
+                    <input 
+                        value={inverted ? Math.round(figure/1.609*1000)/1000 : figure}
+                        id="miles" 
+                        placeholder="Miles" 
+                        type="number" 
+                        disabled={inverted}
+                        onChange={onChange}
+                    />
+                </div>
+                <button class="btn_left" onClick={reset}>reset</button>
+                <button class="btn_right" onClick={onInvert}>{inverted ? "invert": "turn back"}</button>
+            </div>
+        )
+    }
+
+    function App() {
+        const [index, setIndex] = React.useState("x")
+        const onSelect = (event) => {
+            setIndex(event.target.value);
+            //event.target.value는 1 또는 0이 나올 것임
+        }
+        return (
+            <div>
+                <h1>Super Converter</h1>
+                <select value={index} onChange={onSelect}>
+                    <option value="x">Select your units</option>
+                    <option value="0">Minutes & Hours</option>
+                    <option value="1">Kilometers & Miles</option>
+                </select>
+                <hr/>
+                {index === "x" ? "Please select your units." : null}
+                {index === "0" ? <MinutesToHours /> : null}
+                {index === "1" ? <KmToMiles /> : null}
+            </div>
+        ); //만약 index가 "0"이면 mth 컴포넌트를 실행하고, 0이 아니면 null
+    } 
+    /* select 창으로 뭔가를 선택하면, 값이 바뀌므로 onChange 함수 실행. 
+    그로 인해 set함수가 index를 바꿈+밑의 return 전체 새로 리렌더링. 그러면 script 밑의 if문으로 판별해서 
+    적당한 컴포넌트를 실행 */
+                    
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+
+</script>
+
+</html>
